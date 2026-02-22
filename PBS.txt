@@ -1,3 +1,6 @@
 PBS
 - Backend: Nest JS(TypeScript)
+- API (npm i -g @nestjs/cli)
 - 
+
+- NPM RUN START
