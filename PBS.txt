@@ -3,4 +3,7 @@ PBS
 - API (npm i -g @nestjs/cli)
 - 
 
-- NPM RUN START
+- npm run start (manual refresh)
+- npm run start:dev (automatic refresh)
+
+- nest g resource kategori (api/kategori)
