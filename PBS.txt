@@ -1,9 +1,14 @@
 PBS
 - Backend: Nest JS(TypeScript)
-- API (npm i -g @nestjs/cli)
-- 
+- API: (npm i -g @nestjs/cli)
+- ORM: nest new nestjs-prisma(kategori)
 
 - npm run start (manual refresh)
 - npm run start:dev (automatic refresh)
 
 - nest g resource kategori (api/kategori)
+
+- npm install prisma --save-dev
+- npm install @prisma/client @prisma/adapter-pg pg
+- npx prisma init --db --output ../src/generated/prisma / npx prisma init
+- npx prisma migrate dev --name init
