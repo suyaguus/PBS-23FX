@@ -13,3 +13,5 @@ PBS
 - npx prisma init --db --output ../src/generated/prisma / npx prisma init
 - npx prisma migrate dev --name init
 - npx prisma generate
+
+- nest g resource kategori (setup filed kategori src)
