@@ -1,6 +1,8 @@
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
+  // delete folder genereated lalu genereate ulang dan + src/generated/prisma
+  moduleFormat = "cjs"
 }
 
 datasource db {

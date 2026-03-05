@@ -12,3 +12,4 @@ PBS
 - npm install @prisma/client @prisma/adapter-pg pg
 - npx prisma init --db --output ../src/generated/prisma / npx prisma init
 - npx prisma migrate dev --name init
+- npx prisma generate

@@ -12,8 +12,11 @@ export class KategoriService {
     return 'This action adds a new kategori';
   }
 
-  findAll() {
-    return `This action returns all kategori`;
+  async findAll() {
+    // return `This action returns all kategori`;
+    // tampilkan data kategori
+    const data = await this.prisma.kategori.findMany();
+    return data;
   }
 
   findOne(id: number) {
