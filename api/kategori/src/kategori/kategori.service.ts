@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -14,8 +15,43 @@ export class KategoriService {
   constructor(private readonly prisma: PrismaService) {}
 
   // simpan data kategori
-  create(createKategoriDto: CreateKategoriDto) {
-    return 'This action adds a new kategori';
+  async create(createKategoriDto: CreateKategoriDto) {
+    // cek apakah data nama kategori sudah ada
+    const exist = await this.prisma.kategori.findFirst({
+      where: {
+        nama: createKategoriDto.nama,
+      },
+    });
+
+    // jika nama kategori ditemukan
+    if (exist) {
+      // tampilkan response
+      throw new ConflictException({
+        succsess: false,
+        message: `Data Ketegori gagal disimpan (Nama Kategori ${createKategoriDto.nama} Sudah ada)`,
+        metadata: {
+          status: HttpStatus.CONFLICT,
+        },
+      });
+    }
+
+    // jika nama kategori tidak ditemukan
+
+    // simpan data kategori
+    await this.prisma.kategori.create({
+      data: {
+        nama: createKategoriDto.nama,
+      },
+    });
+
+    // tampilkan respone
+    return {
+      success: true,
+      message: `Data Kategori Berhasil Disimpan`,
+      metadata: {
+        status: HttpStatus.CREATED,
+      },
+    };
   }
 
   async findAll() {

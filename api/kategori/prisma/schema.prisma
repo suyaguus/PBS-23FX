@@ -11,5 +11,5 @@ datasource db {
 
 model Kategori {
   id    Int     @id @default(autoincrement())
-  nama  String  @db.VarChar(20)
+  nama  String  @db.VarChar(20) //@unique
 }
