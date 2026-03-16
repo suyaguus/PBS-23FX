@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
   // delete folder genereated lalu genereate ulang dan + src/generated/prisma
   moduleFormat = "cjs"
 }
@@ -10,6 +10,7 @@ datasource db {
 }
 
 model Kategori {
-  id    Int     @id @default(autoincrement())
-  nama  String  @db.VarChar(20) //@unique
+  id          Int    @id @default(autoincrement())
+  nama        String @db.VarChar(20) //@unique
+  nama_filter String @db.VarChar(20) //@unique
 }

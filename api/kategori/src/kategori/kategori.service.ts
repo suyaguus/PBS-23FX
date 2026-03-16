@@ -1,6 +1,5 @@
 import {
   ConflictException,
-  HttpException,
   HttpStatus,
   Injectable,
   NotFoundException,
@@ -16,10 +15,17 @@ export class KategoriService {
 
   // simpan data kategori
   async create(createKategoriDto: CreateKategoriDto) {
+    // buat variable untuk filter nama
+    // const nama_filter = createKategoriDto.nama.toUpperCase();
+    const nama_filter = createKategoriDto.nama
+      .trim()
+      .replace(/\s/g, '')
+      .toLowerCase();
+
     // cek apakah data nama kategori sudah ada
     const exist = await this.prisma.kategori.findFirst({
       where: {
-        nama: createKategoriDto.nama,
+        nama_filter: nama_filter,
       },
     });
 
@@ -41,6 +47,7 @@ export class KategoriService {
     await this.prisma.kategori.create({
       data: {
         nama: createKategoriDto.nama,
+        nama_filter: nama_filter,
       },
     });
 
