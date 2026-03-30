@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   HttpStatus,
   Injectable,
@@ -100,8 +101,51 @@ export class KategoriService {
     };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} kategori`;
+  // fungsi untuk detail data
+  async findOne(id: number) {
+    // return `This action returns a #${id} kategori`;
+
+    try {
+      // tampilkan data kategori berdasarkan id
+      const data = await this.prisma.kategori.findUnique({
+        where: {
+          id: id,
+        },
+      });
+
+      // jika data kategori tidak ditemukan
+      if (!data) {
+        throw new NotFoundException({
+          success: false,
+          message: `Data Kategori Tidak Ditemukan!`,
+          metadata: {
+            status: HttpStatus.NOT_FOUND,
+          },
+        });
+      }
+
+      // jika data ketegori ditemukan
+      return {
+        success: true,
+        message: `Data Berhasil ditarik`,
+        metadata: {
+          status: HttpStatus.OK,
+        },
+        data: data,
+      };
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+
+      throw new BadRequestException({
+        success: false,
+        message: `Parameter/Slug ID Harus Angka!`,
+        metadata: {
+          status: HttpStatus.BAD_REQUEST,
+        },
+      });
+    }
   }
 
   update(id: number, updateKategoriDto: UpdateKategoriDto) {
