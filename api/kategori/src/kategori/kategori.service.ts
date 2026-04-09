@@ -9,7 +9,8 @@ import {
 import { CreateKategoriDto } from './dto/create-kategori.dto';
 import { UpdateKategoriDto } from './dto/update-kategori.dto';
 import { PrismaService } from 'src/prisma.service';
-import { notExistKategori } from 'src/common/utils/not-exist.utils';
+import { notExistKategori } from 'src/common/utils/not-exist.util';
+import { conflict } from 'src/common/utils/conflict.util';
 
 @Injectable()
 export class KategoriService {
@@ -20,29 +21,14 @@ export class KategoriService {
   async create(createKategoriDto: CreateKategoriDto) {
     // buat variable untuk filter nama
     // const nama_filter = createKategoriDto.nama.toUpperCase();
-    const nama_filter = createKategoriDto.nama
-      .trim()
-      .replace(/\s/g, '')
-      .toLowerCase();
 
-    // cek apakah data nama kategori sudah ada
-    const exist = await this.prisma.kategori.findFirst({
-      where: {
-        nama_filter: nama_filter,
-      },
-    });
-
-    // jika nama kategori ditemukan
-    if (exist) {
-      // tampilkan response
-      throw new ConflictException({
-        succsess: false,
-        message: process.env.FAILED_SAVE_MESSAGE,
-        metadata: {
-          status: HttpStatus.CONFLICT,
-        },
-      });
-    }
+    // panggil fungsi conflict
+    const nama_filter = await conflict(
+      createKategoriDto.nama,
+      0, // id number jika tidak ada id yang ingin di update
+      this.prisma.kategori,
+      process.env.FAILED_SAVE_MESSAGE ?? '', // ?? '' operator nulis
+    );
 
     // jika nama kategori tidak ditemukan
 
@@ -181,30 +167,13 @@ export class KategoriService {
 
       // buat variable untuk filter nama
       // const nama_filter = createKategoriDto.nama.toUpperCase();
-      const nama_filter = (updateKategoriDto.nama ?? '')
-        .trim()
-        .replace(/\s/g, '')
-        .toLowerCase();
-
-      // cek apakah nama kategori sudah ada
-      const exist = await this.prisma.kategori.findFirst({
-        where: {
-          NOT: { id: id },
-          nama_filter: nama_filter,
-        },
-      });
-
-      // jika nama kategori ditemukan
-      if (exist) {
-        // tampilkan response
-        throw new ConflictException({
-          succsess: false,
-          message: process.env.FAILED_UPDATE_MESSAGE,
-          metadata: {
-            status: HttpStatus.CONFLICT,
-          },
-        });
-      }
+      // panggil fungsi conflict
+      const nama_filter = await conflict(
+        updateKategoriDto.nama ?? '',
+        id, // id number jika tidak ada id yang ingin di update
+        this.prisma.kategori,
+        process.env.FAILED_UPDATE_MESSAGE ?? '',
+      );
 
       // ubah data kategori berdasarkan id
       await this.prisma.kategori.update({
