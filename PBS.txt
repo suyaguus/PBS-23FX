@@ -15,3 +15,12 @@ PBS
 - npx prisma generate
 
 - nest g resource kategori (setup filed kategori src)
+
+FAILED_SAVE_MESSAGE='Data Ketegori gagal disimpan (Nama kategori sudah ada)'
+SUCCESS_SAVE_MESSAGE='Data Kategori Berhasil Disimpan'
+NOT_FOUND_MESSAGE='Data Kategori Tidak Ditemukan'
+SUCCESS_FIND_MESSAGE='Data Berhasil ditarik'
+BAD_REQUEST_MESSAGE_SLUG='Parameter/Slug ID Harus Angka!'
+FAILED_UPDATE_MESSAGE='Data Ketegori gagal diubah (Nama kategori sudah ada)'
+SUCCESS_UPDATE_MESSAGE='Data Kategori Berhasil diubah'
+SUCCESS_DELETE_MESSAGE='Data Kategori Berhasil dihapus'

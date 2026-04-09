@@ -9,7 +9,7 @@ import {
 import { CreateKategoriDto } from './dto/create-kategori.dto';
 import { UpdateKategoriDto } from './dto/update-kategori.dto';
 import { PrismaService } from 'src/prisma.service';
-import { notExistKategori } from 'src/common/utils/notExist.utils';
+import { notExistKategori } from 'src/common/utils/not-exist.utils';
 
 @Injectable()
 export class KategoriService {
