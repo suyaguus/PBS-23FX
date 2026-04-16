@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { KategoriService } from './kategori.service';
 import { KategoriController } from './kategori.controller';
-import { Prisma } from 'generated/prisma/browser';
+// import { Prisma } from 'generated/prisma/browser';
 import { PrismaService } from 'src/prisma.service';
 
 @Module({

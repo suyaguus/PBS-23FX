@@ -1,6 +1,6 @@
 import {
   BadRequestException,
-  ConflictException,
+  // ConflictException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -25,9 +25,9 @@ export class KategoriService {
     // panggil fungsi conflict
     const nama_filter = await conflict(
       createKategoriDto.nama,
-      0, // id number jika tidak ada id yang ingin di update
+      // 0, // id number jika tidak ada id yang ingin di update
       this.prisma.kategori,
-      process.env.FAILED_SAVE_MESSAGE ?? '', // ?? '' operator nulis
+      process.env.FAILED_SAVE_MESSAGE ?? '', // ?? '' operator nulis (! gunakan tanda seru jika sudah ada failled save message nya)
     );
 
     // jika nama kategori tidak ditemukan
@@ -170,9 +170,9 @@ export class KategoriService {
       // panggil fungsi conflict
       const nama_filter = await conflict(
         updateKategoriDto.nama ?? '',
-        id, // id number jika tidak ada id yang ingin di update
         this.prisma.kategori,
         process.env.FAILED_UPDATE_MESSAGE ?? '',
+        id, // id number jika tidak ada id yang ingin di update
       );
 
       // ubah data kategori berdasarkan id

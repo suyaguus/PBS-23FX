@@ -3,6 +3,14 @@ PBS
 - API: (npm i -g @nestjs/cli)
 - ORM: nest new nestjs-prisma(kategori)
 
+MICROSERVICE (BASIS API)
+
+STRUKTUR FOLDER:
+- api
+- cms (buat dummy/static data jika api belum berhasil)
+- user
+- dokumentasi (FRONTEND JALAN BARENGAN DENGAN BACKEND)
+
 - npm run start (manual refresh)
 - npm run start:dev (automatic refresh)
 
