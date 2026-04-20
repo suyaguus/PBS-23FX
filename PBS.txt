@@ -32,3 +32,6 @@ BAD_REQUEST_MESSAGE_SLUG='Parameter/Slug ID Harus Angka!'
 FAILED_UPDATE_MESSAGE='Data Ketegori gagal diubah (Nama kategori sudah ada)'
 SUCCESS_UPDATE_MESSAGE='Data Kategori Berhasil diubah'
 SUCCESS_DELETE_MESSAGE='Data Kategori Berhasil dihapus'
+
+npm i -g @nestjs/cli
+nest new gateway
